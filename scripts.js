@@ -85,3 +85,7 @@ $("#left_btn").click(() =>
         photoLoad(currentPhoto);
     }
 });
+
+imagesData.forEach((item, index) => {
+    $('#thumbnails').append(`<div class="box" data-index="${index}"><div class="title">Something hidden</div><img src="${item.photo}"></img></div>`);
+});
