@@ -52,25 +52,36 @@ $('#photo').attr('src', imagesData[currentPhoto].photo);
 
 let photoLoad = (photoNumber) => {
     $('#photo').attr('src', imagesData[photoNumber].photo);
+    $('h1').text(imagesData[photoNumber].title);
+    $('p').text(imagesData[photoNumber].description);
 }
 
 photoLoad(currentPhoto);
 
+
 $('#right_btn').click(() => 
 {
-    if(currentPhoto<imagesData.length) 
+    if(currentPhoto<imagesData.length-1) 
     {
         currentPhoto++;
+        photoLoad(currentPhoto);
+    }
+    else if(currentPhoto>=imagesData.length-1) {
+        currentPhoto=0; 
         photoLoad(currentPhoto);
     }
 });
 
 
-$("#left_btn").on('click', () => 
+$("#left_btn").click(() => 
 {
     if(currentPhoto>=1) 
     {
         currentPhoto--; 
+        photoLoad(currentPhoto);
+    }
+    else if(currentPhoto===0) {
+        currentPhoto=imagesData.length-1;
         photoLoad(currentPhoto);
     }
 });
