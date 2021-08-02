@@ -48,6 +48,7 @@ let photo8 = {
 
 let currentPhoto = 0;
 let imagesData = [photo1,photo2,photo3,photo4,photo5,photo6,photo7,photo8];
+
 $('#photo').attr('src', imagesData[currentPhoto].photo);
 
 let photoLoad = (photoNumber) => {
@@ -87,5 +88,14 @@ $("#left_btn").click(() =>
 });
 
 imagesData.forEach((item, index) => {
-    $('#thumbnails').append(`<div class="box" data-index="${index}"><div class="title">Something hidden</div><img src="${item.photo}"></img></div>`);
+    $('#thumbnails').append(`<div class="box" data-index="${index}"><div class="title" data-index="${index}">${item.title}</div><img src="${item.photo}" data-index="${index}"></img></div>`);
+    $(".box, .title, .box img").click((event) => {
+        let indexClicked = $(event.target).attr('data-index');
+        // indexClicked is now a string! if you need it as a number you have to change it
+        // because for example "1" + 1 is going to be "11" and not 2
+        let numberIndex = parseInt(indexClicked);
+        // now numberIndex is a number
+        currentPhoto=numberIndex;
+        photoLoad(currentPhoto);
+      });
 });
